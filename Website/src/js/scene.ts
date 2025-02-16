@@ -1,11 +1,7 @@
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { HalftonePass } from 'three/examples/jsm/postprocessing/HalftonePass.js';
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-import { BrightnessContrastShader } from 'three/examples/jsm/shaders/BrightnessContrastShader.js';
 
-import { Button } from './button';
 import { Background } from './background';
 import { Title } from './title';
 import Coords from './coords';
@@ -13,7 +9,6 @@ import { updateCameraAspect } from './utility';
 
 class Scene {
   
-  Button: Button;
   Background: Background|null = null;
   Title: Title|null = null;
   Scene: THREE.Scene = new THREE.Scene();
@@ -36,7 +31,6 @@ class Scene {
     this.Mouse = { X: this.$Wrapper.offsetWidth/2, Y: 0 };
     this.InitialCameraPos = new Coords(this.$Wrapper.offsetWidth/2, -this.$Wrapper.offsetHeight);
     this.Smooth = this.InitialCameraPos;
-    this.Button = new Button(this.Camera);
 
     this.Renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.Renderer.autoClear = false;

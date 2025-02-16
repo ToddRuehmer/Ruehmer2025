@@ -1,6 +1,4 @@
 import * as THREE from 'three';
-import VertexShader from '../shaders/vertex.glsl';
-import FragmentShader from '../shaders/fragment.glsl';
 
 class Background {
   Mesh        :THREE.Mesh;

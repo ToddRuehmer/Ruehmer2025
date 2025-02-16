@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import vWaving from '../shaders/vWaving.glsl';
-import FragmentShader from '../shaders/fragment.glsl';
+import FragmentShader from '../shaders/fPassthrough.glsl';
 
 class Title {
   Mesh      : THREE.Mesh;
