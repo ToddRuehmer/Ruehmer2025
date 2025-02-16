@@ -1,0 +1,58 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+# New stages
+stages:
+- stage: Build
+  displayName: "Build Stage"
+  jobs:
+  - job: BuildJob
+    steps:
+    - script: |
+        echo "Restoring .NET Core dependencies..."
+        dotnet restore
+      displayName: 'Restore .NET Core dependencies'
+
+    - script: |
+        echo "Building the .NET Core project..."
+        dotnet build --configuration Release
+      displayName: 'Build .NET Core project'
+
+    - script: |
+        echo "Publishing the .NET Core project..."
+        dotnet publish --configuration Release --output ./publish
+      displayName: 'Publish .NET Core project'
+
+    - script: |
+        echo "Installing frontend dependencies..."
+        npm install
+      displayName: 'Install frontend dependencies'
+
+    - script: |
+        echo "Building the frontend..."
+        npm run build
+      displayName: 'Build frontend'
+
+- stage: Test
+  displayName: "Test Stage"
+  dependsOn: Build  # Ensure Test runs after Build
+  jobs:
+  - job: TestJob
+    steps:
+    - script: |
+        echo "Running .NET Core tests..."
+        dotnet test
+      displayName: 'Run .NET Core tests'
+
+    - script: |
+        echo "Running frontend tests..."
+        npm test
+      displayName: 'Run frontend tests'
